@@ -37,7 +37,10 @@ export default function LoginScreen() {
 
       // If sign in was successful, set the active session
       if (createdSessionId) {
+        await setActive({ session: createdSessionId });
+        console.log("Session activated successfully");
       } else {
+        console.warn("No session created");
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));

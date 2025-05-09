@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 
 export default function Index() {
   const { user } = useUser();
+  // console.log('user :', user)
   return (
     <View
     // style={{
