@@ -1,10 +1,17 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { db } from "../../config/FirebaseConfig";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import Colors from "../../constants/Colors";
 
-export default function Category() {
+export default function Category({ getPetsListByCategory }) {
   const [categoryList, setCategoryList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Dogs");
 
@@ -30,7 +37,14 @@ export default function Category() {
         data={categoryList}
         numColumns={4}
         renderItem={({ item, index }) => (
-          <TouchableOpacity key={index} style={{ flex: 1 }} onPress={() => setSelectedCategory(item?.name)} >
+          <TouchableOpacity
+            key={index}
+            style={{ flex: 1 }}
+            onPress={() => {
+              setSelectedCategory(item?.name);
+              getPetsListByCategory(item?.name);
+            }}
+          >
             <View
               style={[
                 styles.container,
