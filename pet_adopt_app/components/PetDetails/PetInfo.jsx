@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import MarkFavIcon from "../MarkFavIcon";
 
 export default function PetInfo({ petInfo }) {
   return (
@@ -17,7 +17,7 @@ export default function PetInfo({ petInfo }) {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          alignItems: 'center'
+          alignItems: "center",
         }}
       >
         <View>
@@ -30,8 +30,7 @@ export default function PetInfo({ petInfo }) {
             {petInfo?.address || "No address found."}
           </Text>
         </View>
-
-        <Ionicons name="heart-outline" size={30} color="black" />
+        <MarkFavIcon petInfo={petInfo} />
       </View>
     </View>
   );

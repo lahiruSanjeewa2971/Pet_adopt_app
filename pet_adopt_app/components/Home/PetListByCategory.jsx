@@ -20,7 +20,12 @@ export default function PetListByCategory() {
         where("category", "==", categoryToQuery)
       );
       const queryResponse = await getDocs(categoryData);
-      const fetchedData = queryResponse.docs.map((doc) => doc.data());
+      // const fetchedData = queryResponse.docs.map((doc) => doc.data());
+      const fetchedData = queryResponse.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      // console.log('fetchedData :', fetchedData)
       setFetchedPetList(fetchedData);
       setCategoryDataLoading(false);
     } catch (error) {
