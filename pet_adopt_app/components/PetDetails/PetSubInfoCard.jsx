@@ -18,7 +18,7 @@ export default function PetSubInfoCard({ icon, title, value }) {
       }}
     >
       <Image source={icon} style={{ width: 40, height: 40 }} />
-      <View>
+      <View style={{ flex: 1 }}>
         <Text style={{ fontFamily: "delius", fontSize: 16 }}>{title}</Text>
         <Text style={{ fontFamily: "delius", fontSize: 20 }}>{value}</Text>
       </View>

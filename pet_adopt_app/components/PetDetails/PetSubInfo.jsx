@@ -9,13 +9,26 @@ export default function PetSubInfo({ petInfo }) {
       <View style={{ display: "flex", flexDirection: "row" }}>
         <PetSubInfoCard
           icon={require("../../assets/images/calendar.png")}
-          title={""}
-          value={""}
+          title={"Age"}
+          value={petInfo?.age + " Years"}
         />
         <PetSubInfoCard
           icon={require("../../assets/images/bone.png")}
-          title={""}
-          value={""}
+          title={"Breed"}
+          value={petInfo?.breed}
+        />
+      </View>
+
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <PetSubInfoCard
+          icon={require("../../assets/images/sex.png")}
+          title={"Sex"}
+          value={petInfo?.sex || 'Male'}
+        />
+        <PetSubInfoCard
+          icon={require("../../assets/images/weight.png")}
+          title={"Weight"}
+          value={petInfo?.weight || ''}
         />
       </View>
     </View>
