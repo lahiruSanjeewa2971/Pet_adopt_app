@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -23,6 +23,7 @@ import { useUser } from "@clerk/clerk-expo";
 
 export default function AddNewPet() {
   const navigation = useNavigation();
+  const router = useRouter();
   const { user } = useUser();
 
   const [formData, setFormData] = useState({ category: "Dogs", sex: "Male" });
@@ -82,6 +83,13 @@ export default function AddNewPet() {
   };
 
   const handleOnSubmit = async () => {
+    /**
+    |--------------------------------------------------
+    | Function is working but it's slow. one of the reason is the uploading image is large.
+    | make it small using 
+    |expo-image-manipulator
+    |--------------------------------------------------
+    */
     if (Object.keys(formData).length != 8) {
       ToastAndroid.show("Enter All Details.", ToastAndroid.SHORT);
       return;
@@ -105,6 +113,7 @@ export default function AddNewPet() {
         });
         ToastAndroid.show("Submitted successfully!", ToastAndroid.SHORT);
         setLoading(false);
+        router.replace("/(tabs)/home");
       } else {
         ToastAndroid.show("Image upload failed.", ToastAndroid.SHORT);
       }
