@@ -5,7 +5,7 @@ import { GetFavList } from "../../Shared";
 import { doc, getDoc } from "firebase/firestore";
 import PetListItem from "../../components/Home/PetListItem";
 import { db } from "../../config/FirebaseConfig";
-import {useIsFocused} from '@react-navigation/native'
+import { useIsFocused } from "@react-navigation/native";
 
 export default function Favourite() {
   const isFocused = useIsFocused();
