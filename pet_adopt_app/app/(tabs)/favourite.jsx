@@ -5,8 +5,10 @@ import { GetFavList } from "../../Shared";
 import { doc, getDoc } from "firebase/firestore";
 import PetListItem from "../../components/Home/PetListItem";
 import { db } from "../../config/FirebaseConfig";
+import {useIsFocused} from '@react-navigation/native'
 
 export default function Favourite() {
+  const isFocused = useIsFocused();
   const { user } = useUser();
 
   const [userFavPetIDs, setUserFavPetIDs] = useState([]);
@@ -14,18 +16,21 @@ export default function Favourite() {
   const [makeListRefresh, setMakeListRefresh] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user && isFocused) {
       getUserFavPets();
     }
-  }, [user]);
+  }, [user, isFocused]);
 
   const getUserFavPets = async () => {
     setMakeListRefresh(true);
-    const response = await GetFavList(user);
-    // console.log("fav list :", response?.favourites);
-    setUserFavPetIDs(response?.favourites ? response?.favourites : []);
-    setMakeListRefresh(false);
-    getPetDetailsById(response?.favourites);
+    try {
+      const response = await GetFavList(user);
+      setUserFavPetIDs(response?.favourites ? response?.favourites : []);
+      setMakeListRefresh(false);
+      getPetDetailsById(response?.favourites);
+    } catch (error) {
+      console.log("error in getUserFavPets :", error);
+    }
   };
 
   const getPetDetailsById = async (idList) => {
